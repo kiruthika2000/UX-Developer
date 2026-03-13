@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiruthika Venkatesan — UX Content Designer & Conversational AI Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f2ec;
+    --accent: #c8440a;
+    --accent2: #1a3a5c;
+    --muted: #8a8278;
+    --line: rgba(13,13,13,0.12);
+    --highlight: #e8e0d0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(245,242,236,0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 3rem 6rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.15em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 38ch;
+    margin: 1.5rem 0 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 0.85rem 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    overflow: hidden;
+  }
+
+  .hero-graphic {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  /* Decorative conversation bubbles */
+  .chat-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .chat-bubble {
+    padding: 1rem 1.4rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: bubbleIn 0.5s ease forwards;
+  }
+
+  .chat-bubble.user {
+    background: var(--accent2);
+    color: white;
+    align-self: flex-end;
+    border-radius: 18px 18px 4px 18px;
+  }
+
+  .chat-bubble.ai {
+    background: white;
+    color: var(--ink);
+    align-self: flex-start;
+    border-radius: 18px 18px 18px 4px;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .chat-bubble.ai .ai-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .chat-bubble:nth-child(1) { animation-delay: 0.3s; }
+  .chat-bubble:nth-child(2) { animation-delay: 0.8s; }
+  .chat-bubble:nth-child(3) { animation-delay: 1.3s; }
+  .chat-bubble:nth-child(4) { animation-delay: 1.8s; }
+
+  @keyframes bubbleIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 14rem;
+    font-weight: 900;
+    color: rgba(13,13,13,0.04);
+    line-height: 1;
+    user-select: none;
+    z-index: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 4rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    max-width: 80px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    color: #3a3530;
+    margin-bottom: 1.2rem;
+    line-height: 1.75;
+  }
+
+  .about-text strong {
+    color: var(--accent);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    padding: 1.75rem;
+    background: white;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* SKILLS */
+  .skills-section {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .skills-section .section-label {
+    color: rgba(245,242,236,0.4);
+  }
+
+  .skills-section .section-label::after {
+    background: rgba(245,242,236,0.2);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 3rem;
+  }
+
+  .skill-block {
+    padding: 2.5rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s;
+  }
+
+  .skill-block:hover {
+    background: rgba(200,68,10,0.15);
+  }
+
+  .skill-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .skill-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--paper);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.7rem;
+    background: rgba(255,255,255,0.08);
+    color: rgba(245,242,236,0.7);
+    border-radius: 2px;
+  }
+
+  .skill-tag.hot {
+    background: rgba(200,68,10,0.3);
+    color: #f5a07a;
+  }
+
+  /* WORK */
+  .work-timeline {
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .work-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .work-item {
+    padding: 0 0 4rem 3rem;
+    position: relative;
+  }
+
+  .work-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .work-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .work-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .work-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .work-role {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .work-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .work-bullets li {
+    font-size: 0.92rem;
+    color: #3a3530;
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .work-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .work-impact {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: white;
+    background: var(--accent);
+    padding: 0.15rem 0.5rem;
+    margin-left: 0.4rem;
+    border-radius: 2px;
+  }
+
+  /* PROJECTS */
+  .projects-section {
+    background: #f0ece3;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .project-card {
+    background: white;
+    border: 1px solid var(--line);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
+
+  .project-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(13,13,13,0.04);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .project-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+    color: #5a5248;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--line);
+    padding-top: 1.25rem;
+    margin-top: auto;
+  }
+
+  .project-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  .outcome-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .outcome-pill {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent2);
+    background: rgba(26,58,92,0.08);
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+  }
+
+  /* APPROACH (Google-specific) */
+  .approach-section {
+    background: var(--accent2);
+    color: white;
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 3.5rem;
+  }
+
+  .approach-step {
+    padding: 2.5rem 2rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+
+  .approach-step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.1);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .approach-step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .approach-step p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* EDUCATION */
+  .edu-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .edu-card {
+    padding: 2rem 2.5rem;
+    border: 1.5px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+  }
+
+  .edu-school {
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .edu-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .edu-gpa {
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent2);
+    background: rgba(26,58,92,0.08);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+  }
+
+  .contact-section h2 {
+    color: var(--paper);
+    margin: 2rem 0 1rem;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .contact-section .hero-tag { justify-content: center; }
+  .contact-section .hero-tag::before { display: none; }
+
+  .contact-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,242,236,0.6);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: color 0.2s;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid rgba(245,242,236,0.2);
+  }
+
+  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  .footer-note {
+    margin-top: 5rem;
+    font-size: 0.75rem;
+    color: rgba(245,242,236,0.25);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+    margin: 0;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { display: none; }
+    section { padding: 4rem 2rem; }
+    .about-grid, .projects-grid, .skills-grid, .approach-grid, .edu-cards { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Kiruthika Venkatesan</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">UX Content Designer · Conversational AI</div>
+    <h1>Designing <em>language</em> that thinks with users.</h1>
+    <p class="hero-subtitle">
+      7+ years translating complex AI capabilities into intuitive human experiences — from defining AI persona and voice systems to architecting multi-turn conversational flows for LLM-powered products.
+    </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View Experience</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-graphic">
+      <div class="chat-stack">
+        <div class="chat-bubble user">How do I set up health monitoring for my family?</div>
+        <div class="chat-bubble ai">
+          <span class="ai-label">✦ AI Response</span>
+          I can help with that. To get started, tell me: are you setting this up for children, adults over 65, or both?
+        </div>
+        <div class="chat-bubble user">Mostly for my 72-year-old father with diabetes.</div>
+        <div class="chat-bubble ai">
+          <span class="ai-label">✦ AI Response</span>
+          Got it. I'll focus on glucose tracking, medication reminders, and fall detection — the three most impactful features for his needs.
+        </div>
+      </div>
+    </div>
+    <div class="hero-bg-text">AI</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2>Bridging human intent<br>and machine intelligence.</h2>
+
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>
+        I'm a UX Content Designer and Conversational AI Strategist specializing in the design of <strong>LLM-powered experiences</strong> — turning what AI can do into something people can naturally use and trust.
+      </p>
+      <p>
+        My work lives at the intersection of language, logic, and user psychology. I design the words behind systems: the prompts, personas, turn structures, error states, and voice guidelines that make AI feel genuinely helpful rather than just technically capable.
+      </p>
+      <p>
+        At FINRA and Cognizant, I've shaped <strong>conversational patterns for enterprise platforms</strong>, reduced friction in complex workflows, and built the content systems that help teams maintain consistency at scale. I'm pursuing my master's in Information Technology at the University of Denver with a 3.97 GPA, deepening my foundation in the technical side of AI systems.
+      </p>
+      <p>
+        I'm drawn to Google's challenge of defining how AI should <strong>speak, reason, and respond</strong> at consumer scale — and building the systems that make those interactions feel seamless.
+      </p>
+    </div>
+
+    <div class="stats-grid fade-up">
+      <div class="stat-card">
+        <div class="stat-num">7+</div>
+        <div class="stat-label">Years UX & Content Design experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3.97</div>
+        <div class="stat-label">Graduate GPA, M.S. Information Technology</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">45%</div>
+        <div class="stat-label">Workflow efficiency gain via conversational UX redesign</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">End-to-end AI product frameworks designed & shipped</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-label">02 — Capabilities</div>
+  <h2 style="color: var(--paper);">What I bring to<br><em style="color: var(--accent);">Google Devices & Services.</em></h2>
+
+  <div class="skills-grid fade-up">
+    <div class="skill-block">
+      <span class="skill-icon">✦</span>
+      <h3>Conversational AI Design</h3>
+      <p style="font-size:0.88rem; color: rgba(245,242,236,0.6); line-height:1.6;">Designing multi-turn human-AI interactions, intent structures, and turn-by-turn flow architectures for LLM-powered products.</p>
+      <div class="skill-tags">
+        <span class="skill-tag hot">Multi-turn Dialogue</span>
+        <span class="skill-tag hot">LLM Prompting</span>
+        <span class="skill-tag">Intent Recognition</span>
+        <span class="skill-tag">Fallback Design</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <span class="skill-icon">◈</span>
+      <h3>AI Persona & Voice Systems</h3>
+      <p style="font-size:0.88rem; color: rgba(245,242,236,0.6); line-height:1.6;">Defining personality, tone, style guides, and response conventions that give AI products a coherent, trustworthy identity at scale.</p>
+      <div class="skill-tags">
+        <span class="skill-tag hot">AI Persona Design</span>
+        <span class="skill-tag hot">Voice & Tone</span>
+        <span class="skill-tag">Style Systems</span>
+        <span class="skill-tag">Content Guidelines</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <span class="skill-icon">◉</span>
+      <h3>UX Writing & Content Architecture</h3>
+      <p style="font-size:0.88rem; color: rgba(245,242,236,0.6); line-height:1.6;">Creating scalable content systems, interaction copy, error messaging, and onboarding flows for complex digital products.</p>
+      <div class="skill-tags">
+        <span class="skill-tag hot">UX Writing</span>
+        <span class="skill-tag">Content Strategy</span>
+        <span class="skill-tag">Microcopy</span>
+        <span class="skill-tag">Error States</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <span class="skill-icon">⬡</span>
+      <h3>Cross-functional Leadership</h3>
+      <p style="font-size:0.88rem; color: rgba(245,242,236,0.6); line-height:1.6;">Partnering with PMs, engineers, and UX researchers to align product strategy with user needs and executive priorities.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Product Strategy</span>
+        <span class="skill-tag">Research Synthesis</span>
+        <span class="skill-tag">Stakeholder Alignment</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <span class="skill-icon">⊕</span>
+      <h3>Generative AI & Prompt Engineering</h3>
+      <p style="font-size:0.88rem; color: rgba(245,242,236,0.6); line-height:1.6;">Hands-on experience with LLM-based systems, prompt design, AI agent interaction patterns, and response evaluation.</p>
+      <div class="skill-tags">
+        <span class="skill-tag hot">Generative AI</span>
+        <span class="skill-tag hot">Prompt Engineering</span>
+        <span class="skill-tag">AI Agents</span>
+        <span class="skill-tag">NLU</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <span class="skill-icon">◎</span>
+      <h3>Design Tools & Technical Fluency</h3>
+      <p style="font-size:0.88rem; color: rgba(245,242,236,0.6); line-height:1.6;">Working knowledge of Figma, Miro, Jira, and foundational Python/JS for understanding technical constraints in AI systems.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Miro</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">APIs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="work">
+  <div class="section-label">03 — Experience</div>
+  <h2>Where I've shaped<br>AI-driven experiences.</h2>
+
+  <div class="work-timeline fade-up">
+
+    <div class="work-item">
+      <div class="work-meta">
+        <span class="work-company">FINRA USA</span>
+        <span class="work-date">May 2025 – Oct 2025</span>
+      </div>
+      <div class="work-role">AI Designer — Technology Intern</div>
+      <ul class="work-bullets">
+        <li>Designed user-centered UX content and contextual guidance for AI-assisted DevOps automation platforms, improving engineering team onboarding efficiency by <span class="work-impact">+30%</span></li>
+        <li>Designed conversational interaction patterns and contextual messaging for CI/CD systems in close collaboration with PMs and engineers, increasing workflow clarity by <span class="work-impact">+28%</span></li>
+        <li>Redesigned system prompts, error messages, and interaction flows for internal automation platforms, reducing configuration errors and support tickets by <span class="work-impact">−25%</span></li>
+        <li>Defined scalable voice, tone, and conversational UX guidelines for AI-enabled tools, driving a <span class="work-impact">+22%</span> increase in platform adoption</li>
+      </ul>
+    </div>
+
+    <div class="work-item">
+      <div class="work-meta">
+        <span class="work-company">Cognizant Technology Solutions</span>
+        <span class="work-date">Jul 2021 – Aug 2024</span>
+      </div>
+      <div class="work-role">Senior Product Lead</div>
+      <ul class="work-bullets">
+        <li>Designed content architecture and conversational interaction flows for enterprise CRM applications used by global teams, improving workflow completion efficiency by <span class="work-impact">+45%</span></li>
+        <li>Developed UX writing standards, system messaging frameworks, and conversational content patterns reducing task errors by <span class="work-impact">−35%</span></li>
+        <li>Led cross-functional initiatives to standardize voice, tone, and UX content guidelines across enterprise applications, improving product consistency by <span class="work-impact">+32%</span></li>
+        <li>Collaborated with product managers, UX researchers, and engineers to translate complex technical requirements into intuitive conversational experiences</li>
+      </ul>
+    </div>
+
+    <div class="work-item">
+      <div class="work-meta">
+        <span class="work-company">Cognizant Technology Solutions</span>
+        <span class="work-date">Jul 2020 – Jul 2021</span>
+      </div>
+      <div class="work-role">UX Product Manager</div>
+      <ul class="work-bullets">
+        <li>Designed UX copy, conversational prompts, and user-facing messaging for enterprise CRM workflows, improving task completion efficiency by <span class="work-impact">+35%</span></li>
+        <li>Created intuitive interaction flows and contextual messaging reducing navigation errors by <span class="work-impact">−27%</span></li>
+        <li>Produced technical documentation and UX content strategies improving product adoption and system usability by <span class="work-impact">+24%</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-label">04 — Featured Work</div>
+  <h2>AI product experiences<br>I've designed end-to-end.</h2>
+
+  <div class="projects-grid fade-up">
+
+    <div class="project-card">
+      <div class="project-number">01</div>
+      <div class="project-type">LLM · Enterprise · Conversational AI</div>
+      <h3>AI Conversational Assistant for Enterprise Productivity</h3>
+      <p>
+        Designed a conversational AI assistant powered by Large Language Models, enabling users to interact with enterprise systems through natural language and multi-turn conversations. Defined AI persona, voice guidelines, and conversational flow frameworks covering onboarding, task automation, and system navigation.
+      </p>
+      <div class="outcome-pills">
+        <span class="outcome-pill">+40% interaction clarity</span>
+        <span class="outcome-pill">+35% task completion</span>
+      </div>
+      <div class="project-meta">
+        <span>⏱ 8 months</span>
+        <span>👥 10+ team</span>
+        <span>🎯 AI UX Content Designer</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">02</div>
+      <div class="project-type">Generative AI · Design Systems · Content Strategy</div>
+      <h3>Generative AI Interaction Design Framework</h3>
+      <p>
+        Designed a scalable content design system for AI-powered interfaces, establishing conversational patterns, response structures, and multi-turn flow architectures. Developed intent recognition structures and contextual response frameworks, then validated through usability testing and interaction analysis.
+      </p>
+      <div class="outcome-pills">
+        <span class="outcome-pill">+32% conversational consistency</span>
+        <span class="outcome-pill">+30% task success rate</span>
+      </div>
+      <div class="project-meta">
+        <span>⏱ 7 months</span>
+        <span>👥 18+ team</span>
+        <span>🎯 Lead Conversational UX Strategist</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- APPROACH -->
+<section class="approach-section">
+  <div class="section-label" style="color: rgba(255,255,255,0.4);">05 — Design Philosophy</div>
+  <h2 style="color: white;">How I approach<br><em style="color: #f5a07a;">human-AI interaction design.</em></h2>
+
+  <div class="approach-grid fade-up">
+    <div class="approach-step">
+      <div class="approach-step-num">01</div>
+      <h3>Understand the user's mental model</h3>
+      <p>AI interactions fail when they don't match how users think. I start with research to map intent, vocabulary, and expectation gaps.</p>
+    </div>
+    <div class="approach-step">
+      <div class="approach-step-num">02</div>
+      <h3>Define the AI's character & boundaries</h3>
+      <p>Every AI product needs a persona: what it knows, how it sounds, what it won't do. I establish these foundations before writing a single response.</p>
+    </div>
+    <div class="approach-step">
+      <div class="approach-step-num">03</div>
+      <h3>Design the full turn-by-turn arc</h3>
+      <p>Great conversational design is architecture. I map every branch — the happy path, the clarification loop, the graceful failure — before polishing copy.</p>
+    </div>
+    <div class="approach-step">
+      <div class="approach-step-num">04</div>
+      <h3>Test, measure, and iterate</h3>
+      <p>I validate with real users and track concrete metrics — task success rates, escalation frequency, satisfaction scores — to drive continuous improvement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">06 — Education</div>
+  <h2>Academic foundation in<br>technology & systems.</h2>
+
+  <div class="edu-cards fade-up">
+    <div class="edu-card">
+      <div class="edu-degree">Master of Science, Information Technology</div>
+      <div class="edu-school">University of Denver</div>
+      <div class="edu-date">Aug 2024 – Apr 2026</div>
+      <div class="edu-gpa">CGPA 3.97 / 4.0</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Engineering, Computer Science</div>
+      <div class="edu-school">Anna University</div>
+      <div class="edu-date">Aug 2017 – May 2021</div>
+      <div class="edu-gpa">CGPA 3.8 / 4.0</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="hero-tag">Open to opportunities</div>
+  <h2>Let's design something<br><em>meaningful together.</em></h2>
+  <p style="color: rgba(245,242,236,0.55); max-width: 44ch; margin: 0 auto 1rem; font-size: 1rem; line-height: 1.7;">
+    I'm currently exploring roles at the intersection of AI and content design. If you're building something that requires language to truly think with users — I'd love to connect.
+  </p>
+
+  <div class="contact-links">
+    <a href="mailto:kiruthikavenkat2704@gmail.com" class="contact-link">
+      ✉ kiruthikavenkat2704@gmail.com
+    </a>
+    <a href="tel:+17208135590" class="contact-link">
+      ☎ (720) 813-5590
+    </a>
+    <a href="#" class="contact-link">
+      ◈ Austin, TX
+    </a>
+  </div>
+
+  <p class="footer-note">Kiruthika Venkatesan · UX Content Designer & Conversational AI Strategist · 2025</p>
+</section>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
